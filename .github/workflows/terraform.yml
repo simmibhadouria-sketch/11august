@@ -20,8 +20,8 @@ jobs:
       - name: Azure Login
         run: |
           az login --service-principal \
-            --username "ankita@ankudevopsgmail.onmicrosoft.com"\
-            --password "Todo031056"\
+            --username "ankudevops_gmail.com#EXT#@ankudevopsgmail.onmicrosoft.com"\
+            --password "Kuldip@Sharma@1"\
             --tenant "fde3126b-b5b9-4d9e-ab0c-f949118194f2"
 
       - name: Set Azure Subscription
