@@ -20,7 +20,7 @@ jobs:
       - name: Azure Login
         run: |
           az login --service-principal \
-            --username "ankudevops_gmail.com#EXT#@ankudevopsgmail.onmicrosoft.com"\
+            --username "ankudevops_gmail.com"\
             --password "Kuldip@Sharma@1"\
             --tenant "fde3126b-b5b9-4d9e-ab0c-f949118194f2"
 
