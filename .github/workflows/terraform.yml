@@ -3,7 +3,7 @@ name: Terraform Azure Pipeline
 on:
   push:
     branches:
-      - "g9 test"
+      - "test"
 
 jobs:
   terraform:
@@ -11,40 +11,35 @@ jobs:
 
     steps:
 
-      # 1. Checkout g9 test branch
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Install Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # 3. Login to Azure
       - name: Azure Login
-        uses: azure/login@v2
-        with:
-          creds: |
-            {
-              "clientId": "ankita@ankudevopsgmail.onmicrosoft.com",
-              "clientSecret": "Todo031056",
-              "subscriptionId": "4b65089c-f974-4b72-8aa1-3a5821bc947a",
-              "tenantId": "fde3126b-b5b9-4d9e-ab0c-f949118194f2"
-            }
+        run: |
+          az login --service-principal \
+            --username "ankita@ankudevopsgmail.onmicrosoft.com"\
+            --password "Todo031056"\
+            --tenant "fde3126b-b5b9-4d9e-ab0c-f949118194f2"
 
-      # 4. Terraform Init
+      - name: Set Azure Subscription
+        run: |
+          az account set \
+            --subscription "4b65089c-f974-4b72-8aa1-3a5821bc947a"
+
+      - name: Check Azure Login
+        run: az account show
+
       - name: Terraform Init
         run: terraform init
 
-      # 5. Terraform Validate
       - name: Terraform Validate
         run: terraform validate
 
-      # 6. Terraform Plan
       - name: Terraform Plan
         run: terraform plan
 
-      # 7. Terraform Apply
       - name: Terraform Apply
         run: terraform apply -auto-approve
-       
-        
